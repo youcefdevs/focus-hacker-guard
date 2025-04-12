@@ -9,7 +9,7 @@ const WaitlistForm = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
@@ -19,12 +19,46 @@ const WaitlistForm = () => {
     
     setIsSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      toast.success("You've joined the waitlist!");
-      setEmail('');
+    try {
+      // This would typically be handled by a server-side function
+      // Here we're using a client-side proxy approach for demo
+      const response = await fetch("https://us21.api.mailchimp.com/3.0/lists/YOUR_LIST_ID/members", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Note: In production, you should NOT expose your API key in client-side code
+          // This is for demonstration only - you should use a backend service
+          "Authorization": `Basic ${btoa(`anystring:YOUR_API_KEY`)}`
+        },
+        body: JSON.stringify({
+          email_address: email,
+          status: "subscribed",
+          merge_fields: {
+            SOURCE: "Touch Keyboard Waitlist"
+          }
+        }),
+      });
+      
+      if (response.ok) {
+        toast.success("You've joined the waitlist!");
+        setEmail('');
+      } else {
+        const errorData = await response.json();
+        console.error("Mailchimp error:", errorData);
+        
+        // Check if the user is already subscribed
+        if (errorData.title === "Member Exists") {
+          toast.info("You're already on our waitlist!");
+        } else {
+          toast.error("Failed to join waitlist. Please try again later.");
+        }
+      }
+    } catch (error) {
+      console.error("Error submitting to Mailchimp:", error);
+      toast.error("Failed to join waitlist. Please try again later.");
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   return (
