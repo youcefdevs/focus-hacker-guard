@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { ArrowRight, AlertCircle } from 'lucide-react';
+import { ArrowRight, AlertCircle, Info } from 'lucide-react';
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const WaitlistForm = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [configError, setConfigError] = useState(false);
+  const [showImplementationNote, setShowImplementationNote] = useState(false);
 
   // Check if Mailchimp is configured
   React.useEffect(() => {
@@ -38,7 +39,16 @@ const WaitlistForm = () => {
       setConfigError(true);
       return;
     }
+
+    setShowImplementationNote(true);
+    toast.error("Direct API calls to Mailchimp are blocked by CORS. See implementation notes below.");
     
+    // For demo purposes, we'll simulate a successful submission
+    // In a real implementation, you would use a server-side API or proxy
+    toast.info(`Would add ${email} to the waitlist (if using server-side implementation)`);
+    
+    // Note: The below code is kept as reference but won't work due to CORS
+    /*
     setIsSubmitting(true);
     
     try {
@@ -89,6 +99,7 @@ const WaitlistForm = () => {
     } finally {
       setIsSubmitting(false);
     }
+    */
   };
 
   return (
@@ -108,6 +119,23 @@ const WaitlistForm = () => {
                 <AlertCircle className="h-4 w-4" />
                 <AlertDescription>
                   Mailchimp is not configured. Please <a href="/admin" className="underline font-medium">set up your API credentials</a> in the admin panel first.
+                </AlertDescription>
+              </Alert>
+            )}
+            
+            {showImplementationNote && (
+              <Alert className="mb-4 bg-blue-900/20 border-blue-800 text-blue-300">
+                <Info className="h-4 w-4" />
+                <AlertDescription>
+                  <p className="font-medium mb-1">Implementation Note:</p>
+                  <p className="text-sm">
+                    Direct API calls to Mailchimp from the browser are blocked by CORS. For a production implementation:
+                  </p>
+                  <ul className="list-disc pl-5 text-sm mt-1 space-y-1">
+                    <li>Create a server-side API endpoint/proxy that makes the Mailchimp API call</li>
+                    <li>Use a serverless function (e.g., Netlify, Vercel, or AWS Lambda)</li>
+                    <li>Implement a backend service to handle the subscription</li>
+                  </ul>
                 </AlertDescription>
               </Alert>
             )}
