@@ -3,11 +3,22 @@ import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, AlertCircle } from 'lucide-react';
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const WaitlistForm = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [configError, setConfigError] = useState(false);
+
+  // Check if Mailchimp is configured
+  React.useEffect(() => {
+    const apiKey = localStorage.getItem('mailchimp_api_key');
+    const listId = localStorage.getItem('mailchimp_list_id');
+    const serverId = localStorage.getItem('mailchimp_server_id');
+    
+    setConfigError(!apiKey || !listId || !serverId);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,12 +35,20 @@ const WaitlistForm = () => {
     
     if (!apiKey || !listId || !serverId) {
       toast.error("Mailchimp not configured. Please set up API credentials in the admin panel.");
+      setConfigError(true);
       return;
     }
     
     setIsSubmitting(true);
     
     try {
+      console.log("Submitting to Mailchimp...", {
+        serverUrl: `https://${serverId}.api.mailchimp.com/3.0/lists/${listId}/members`,
+        email,
+        // Avoid logging the full API key
+        apiKeyConfigured: apiKey ? "Yes (configured)" : "No"
+      });
+      
       // This would typically be handled by a server-side function
       // Here we're using a client-side approach for demo purposes
       const response = await fetch(`https://${serverId}.api.mailchimp.com/3.0/lists/${listId}/members`, {
@@ -49,23 +68,24 @@ const WaitlistForm = () => {
         }),
       });
       
+      const responseData = await response.json();
+      console.log("Mailchimp response:", responseData);
+      
       if (response.ok) {
         toast.success("You've joined the waitlist!");
         setEmail('');
       } else {
-        const errorData = await response.json();
-        console.error("Mailchimp error:", errorData);
-        
         // Check if the user is already subscribed
-        if (errorData.title === "Member Exists") {
+        if (responseData.title === "Member Exists") {
           toast.info("You're already on our waitlist!");
         } else {
-          toast.error("Failed to join waitlist. Please try again later.");
+          console.error("Mailchimp error details:", responseData);
+          toast.error(`Failed to join waitlist: ${responseData.title || 'Unknown error'}`);
         }
       }
     } catch (error) {
       console.error("Error submitting to Mailchimp:", error);
-      toast.error("Failed to join waitlist. Please try again later.");
+      toast.error(`Failed to join waitlist: ${error instanceof Error ? error.message : 'Network error'}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -83,6 +103,15 @@ const WaitlistForm = () => {
           </p>
           
           <div className="bg-gray-800/50 p-8 rounded-lg border border-gray-700">
+            {configError && (
+              <Alert variant="destructive" className="mb-4 bg-red-900/20 border-red-800 text-red-300">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription>
+                  Mailchimp is not configured. Please <a href="/admin" className="underline font-medium">set up your API credentials</a> in the admin panel first.
+                </AlertDescription>
+              </Alert>
+            )}
+            
             <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-4">
               <Input
                 type="email"
@@ -94,7 +123,7 @@ const WaitlistForm = () => {
               />
               <Button 
                 type="submit" 
-                disabled={isSubmitting}
+                disabled={isSubmitting || configError}
                 className="bg-orange hover:bg-orange/90 text-white font-bold"
               >
                 {isSubmitting ? (
