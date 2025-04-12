@@ -17,18 +17,28 @@ const WaitlistForm = () => {
       return;
     }
     
+    // Get Mailchimp settings from localStorage
+    const apiKey = localStorage.getItem('mailchimp_api_key');
+    const listId = localStorage.getItem('mailchimp_list_id');
+    const serverId = localStorage.getItem('mailchimp_server_id');
+    
+    if (!apiKey || !listId || !serverId) {
+      toast.error("Mailchimp not configured. Please set up API credentials in the admin panel.");
+      return;
+    }
+    
     setIsSubmitting(true);
     
     try {
       // This would typically be handled by a server-side function
-      // Here we're using a client-side proxy approach for demo
-      const response = await fetch("https://us21.api.mailchimp.com/3.0/lists/YOUR_LIST_ID/members", {
+      // Here we're using a client-side approach for demo purposes
+      const response = await fetch(`https://${serverId}.api.mailchimp.com/3.0/lists/${listId}/members`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           // Note: In production, you should NOT expose your API key in client-side code
           // This is for demonstration only - you should use a backend service
-          "Authorization": `Basic ${btoa(`anystring:YOUR_API_KEY`)}`
+          "Authorization": `Basic ${btoa(`anystring:${apiKey}`)}`
         },
         body: JSON.stringify({
           email_address: email,
