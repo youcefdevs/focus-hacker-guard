@@ -18,13 +18,21 @@ const FounderStory = () => {
               "I built Touch Keyboard while juggling a SaaS, university, and fighting in the ring — because I needed a weapon to fight distraction. If you're on your grind too, this app is for you."
             </p>
             
-            <div className="flex items-center mt-8">
-              <div className="h-12 w-12 bg-gray-700 rounded-full mr-4"></div>
+            <a href="https://x.com/youcef_boun" target="_blank" rel="noopener noreferrer" className="flex items-center mt-8 hover:opacity-90 transition-opacity">
+              <img 
+                src="https://x.com/youcef_boun/photo" 
+                alt="The Builder" 
+                className="h-12 w-12 rounded-full mr-4 object-cover"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = 'https://avatars.githubusercontent.com/u/499550'; // Fallback image if X photo fails to load
+                }}
+              />
               <div>
                 <h4 className="font-bold">The Builder</h4>
                 <p className="text-sm text-gray-400">Founder, Touch Keyboard</p>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>

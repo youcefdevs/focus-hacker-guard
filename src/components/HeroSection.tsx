@@ -4,6 +4,13 @@ import { Phone, LockKeyhole, KeyRound } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
+  const scrollToWaitlist = () => {
+    const waitlistSection = document.getElementById('waitlist-section');
+    if (waitlistSection) {
+      waitlistSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative overflow-hidden py-20 md:py-32 px-4">
       <div className="hero-gradient absolute inset-0 z-0"></div>
@@ -12,7 +19,7 @@ const HeroSection = () => {
           <div className="flex-1 space-y-6 text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
               Stay focused or pay the 
-              <span className="gradient-text"> bloody price.</span>
+              <span className="gradient-text"> price.</span>
             </h1>
             
             <p className="text-lg md:text-xl text-gray-300 max-w-xl">
@@ -20,7 +27,11 @@ const HeroSection = () => {
             </p>
             
             <div className="pt-4">
-              <Button size="lg" className="bg-orange hover:bg-orange/90 text-white font-bold py-4 px-8 rounded-md">
+              <Button 
+                size="lg" 
+                className="bg-orange hover:bg-orange/90 text-white font-bold py-4 px-8 rounded-md"
+                onClick={scrollToWaitlist}
+              >
                 Join the Waitlist
               </Button>
             </div>
