@@ -53,7 +53,7 @@ const HeroSection = () => {
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center">
                       <LockKeyhole className="h-5 w-5 text-red mr-2" />
-                      <span className="text-xs sm:text-sm text-gray-400">App blocked</span>
+                      <span className="text-xs sm:text-sm text-gray-400">Apps blocked</span>
                     </div>
                     <span className="text-xs text-gray-500">3:45 PM</span>
                   </div>
