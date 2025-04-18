@@ -23,10 +23,6 @@ const FounderStory = () => {
                 src="https://x.com/youcef_boun/photo" 
                 alt="The Builder" 
                 className="h-12 w-12 rounded-full mr-4 object-cover"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.src = 'https://avatars.githubusercontent.com/u/499550'; // Fallback image if X photo fails to load
-                }}
               />
               <div>
                 <h4 className="font-bold">The Builder</h4>
