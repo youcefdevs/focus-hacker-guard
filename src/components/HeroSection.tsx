@@ -47,7 +47,7 @@ const HeroSection = () => {
               />
               
               {/* Phone Content (Positioned Absolutely Within the Frame) */}
-              <div className="absolute top-[10%] left-[9%] right-[9%] bottom-[10%] bg-black rounded-[20px] overflow-hidden">
+              <div className="absolute top-0 left-[9%] right-[9%] bottom-0 bg-black rounded-[20px] overflow-hidden">
                 <div className="w-full h-full flex flex-col p-4">
                   {/* App Header */}
                   <div className="flex items-center justify-between mb-4">
