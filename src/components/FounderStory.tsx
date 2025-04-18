@@ -21,7 +21,7 @@ const FounderStory = () => {
             <a href="https://x.com/youcef_boun" target="_blank" rel="noopener noreferrer" className="flex items-center mt-8 hover:opacity-90 transition-opacity">
               <img 
                 src="https://pbs.twimg.com/profile_images/1756381248296042496/C0KV5Q_i_400x400.jpg" 
-                alt="The Builder" 
+                alt="youcef_boun" 
                 className="h-12 w-12 rounded-full mr-4 object-cover"
               />
               <div>
