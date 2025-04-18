@@ -80,7 +80,7 @@
   );
   box-shadow: 0 0 8px rgba(249,115,22,0.5);
   z-index: 10;
-  animation: scan-move 2s linear infinite;
+  animation: scan-move 4s linear infinite;
 }
 
 @keyframes scan-move {
