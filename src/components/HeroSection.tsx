@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { Phone, LockKeyhole, KeyRound } from 'lucide-react';
+import { LockKeyhole, KeyRound } from 'lucide-react';
+import { Instagram, Smartphone } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
@@ -38,8 +39,14 @@ const HeroSection = () => {
           </div>
           
           <div className="flex-1 md:max-w-md relative">
-            <div className="scan-container bg-gray-900 rounded-xl p-6 border border-gray-800 shadow-2xl">
-              <div className="relative aspect-[9/16] bg-black rounded-xl overflow-hidden border border-gray-800 shadow-lg">
+            <div className="scan-container bg-gray-900 rounded-3xl p-6 border-8 border-gray-800 shadow-2xl relative overflow-hidden">
+              {/* Phone Frame */}
+              <img 
+                src="/lovable-uploads/7643e4d2-22eb-4e76-9c4e-8f0ad8a25914.png" 
+                alt="Phone Frame"
+                className="absolute inset-0 w-full h-full object-cover pointer-events-none z-20"
+              />
+              <div className="relative aspect-[9/16] bg-black rounded-xl overflow-hidden">
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
                   <div className="w-full mb-8">
                     <div className="flex items-center justify-between mb-6">
@@ -52,8 +59,14 @@ const HeroSection = () => {
                     
                     <div className="space-y-4 mb-8">
                       <div className="w-full h-16 bg-gray-800 rounded-md flex items-center justify-center">
-                        <Phone className="h-6 w-6 text-gray-400 mr-2" />
+                        <Instagram className="h-6 w-6 text-gray-400 mr-2" />
                         <span className="text-gray-300">Instagram</span>
+                      </div>
+                      <div className="w-full h-16 bg-gray-800 rounded-md flex items-center justify-center">
+                        <svg className="h-6 w-6 text-gray-400 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                        </svg>
+                        <span className="text-gray-300">TikTok</span>
                       </div>
                     </div>
                     
@@ -62,10 +75,12 @@ const HeroSection = () => {
                       <p className="text-sm text-gray-400 mb-6">Place your hand on keyboard and scan</p>
                       
                       <div className="relative w-full aspect-video bg-gray-800 rounded-lg mb-4 overflow-hidden">
+                        <img 
+                          src="/lovable-uploads/3bcec285-00d7-4326-a889-4ba713858d41.png" 
+                          alt="Keyboard Scan" 
+                          className="w-full h-full object-cover"
+                        />
                         <div className="scan-line animate-scan-line"></div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <KeyRound className="h-10 w-10 text-gray-600" />
-                        </div>
                       </div>
                       
                       <Button variant="outline" size="sm" className="mt-3 bg-transparent border-gray-700 text-gray-300">
