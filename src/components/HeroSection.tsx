@@ -18,9 +18,8 @@ const HeroSection = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-12">
           <div className="flex-1 space-y-6 text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-              <span>Touch Keyboard: </span>
-              Stay focused or pay the 
-              <span className="gradient-text"> price.</span>
+              <span className="gradient-text">Touch Keyboard: </span>
+              Stay focused or pay the price.
             </h1>
             
             <p className="text-lg md:text-xl text-gray-300 max-w-xl">
