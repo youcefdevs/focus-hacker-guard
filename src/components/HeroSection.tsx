@@ -1,7 +1,6 @@
 
 import React from 'react';
-import { LockKeyhole, KeyRound } from 'lucide-react';
-import { Instagram, Smartphone } from 'lucide-react';
+import { LockKeyhole } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const HeroSection = () => {
@@ -38,55 +37,64 @@ const HeroSection = () => {
             </div>
           </div>
           
-          <div className="flex-1 md:max-w-md relative">
-            <div className="scan-container bg-gray-900 rounded-3xl p-6 border-8 border-gray-800 shadow-2xl relative overflow-hidden">
+          <div className="flex-1 md:max-w-md max-w-[280px] mx-auto relative">
+            <div className="phone-container relative w-full">
               {/* Phone Frame */}
               <img 
                 src="/lovable-uploads/7643e4d2-22eb-4e76-9c4e-8f0ad8a25914.png" 
                 alt="Phone Frame"
-                className="absolute inset-0 w-full h-full object-cover pointer-events-none z-20"
+                className="w-full h-auto pointer-events-none z-20 relative"
               />
-              <div className="relative aspect-[9/16] bg-black rounded-xl overflow-hidden">
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
-                  <div className="w-full mb-8">
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="flex items-center">
-                        <LockKeyhole className="h-6 w-6 text-red mr-2" />
-                        <span className="text-sm text-gray-400">App blocked</span>
-                      </div>
-                      <span className="text-xs text-gray-500">3:45 PM</span>
+              
+              {/* Phone Content (Positioned Absolutely Within the Frame) */}
+              <div className="absolute top-[10%] left-[9%] right-[9%] bottom-[10%] bg-black rounded-[20px] overflow-hidden">
+                <div className="w-full h-full flex flex-col p-4">
+                  {/* App Header */}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center">
+                      <LockKeyhole className="h-5 w-5 text-red mr-2" />
+                      <span className="text-xs sm:text-sm text-gray-400">App blocked</span>
+                    </div>
+                    <span className="text-xs text-gray-500">3:45 PM</span>
+                  </div>
+                  
+                  {/* Blocked Apps List */}
+                  <div className="space-y-2 mb-6">
+                    <div className="w-full h-10 bg-gray-800/50 rounded-md flex items-center px-3">
+                      <img 
+                        src="/lovable-uploads/12668522-7374-4d3e-a645-4b091a97882e.png" 
+                        alt="Instagram" 
+                        className="h-5 w-5 mr-3"
+                      />
+                      <span className="text-xs sm:text-sm text-gray-300">Instagram</span>
+                    </div>
+                    <div className="w-full h-10 bg-gray-800/50 rounded-md flex items-center px-3">
+                      <img 
+                        src="/lovable-uploads/46748eec-7644-4c51-be6a-27c2da6f4c5f.png" 
+                        alt="TikTok" 
+                        className="h-5 w-5 mr-3"
+                      />
+                      <span className="text-xs sm:text-sm text-gray-300">TikTok</span>
+                    </div>
+                  </div>
+                  
+                  {/* Scan Section */}
+                  <div className="text-center mt-auto mb-4">
+                    <h3 className="text-sm sm:text-base font-semibold mb-1">Prove you're working</h3>
+                    <p className="text-xs text-gray-400 mb-3">Place your hand on keyboard and scan</p>
+                    
+                    <div className="relative w-full aspect-video bg-gray-800 rounded-lg mb-3 overflow-hidden">
+                      <img 
+                        src="/lovable-uploads/3bcec285-00d7-4326-a889-4ba713858d41.png" 
+                        alt="Keyboard Scan" 
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="scan-line"></div>
                     </div>
                     
-                    <div className="space-y-4 mb-8">
-                      <div className="w-full h-16 bg-gray-800 rounded-md flex items-center justify-center">
-                        <Instagram className="h-6 w-6 text-gray-400 mr-2" />
-                        <span className="text-gray-300">Instagram</span>
-                      </div>
-                      <div className="w-full h-16 bg-gray-800 rounded-md flex items-center justify-center">
-                        <svg className="h-6 w-6 text-gray-400 mr-2" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
-                        </svg>
-                        <span className="text-gray-300">TikTok</span>
-                      </div>
-                    </div>
-                    
-                    <div className="text-center">
-                      <h3 className="text-lg font-semibold mb-2">Prove you're working</h3>
-                      <p className="text-sm text-gray-400 mb-6">Place your hand on keyboard and scan</p>
-                      
-                      <div className="relative w-full aspect-video bg-gray-800 rounded-lg mb-4 overflow-hidden">
-                        <img 
-                          src="/lovable-uploads/3bcec285-00d7-4326-a889-4ba713858d41.png" 
-                          alt="Keyboard Scan" 
-                          className="w-full h-full object-cover"
-                        />
-                        <div className="scan-line animate-scan-line"></div>
-                      </div>
-                      
-                      <Button variant="outline" size="sm" className="mt-3 bg-transparent border-gray-700 text-gray-300">
-                        Start Scan
-                      </Button>
-                    </div>
+                    <Button variant="outline" size="sm" className="text-xs sm:text-sm bg-transparent border-gray-700 text-gray-300 py-1 h-8">
+                      Start Scan
+                    </Button>
                   </div>
                 </div>
               </div>

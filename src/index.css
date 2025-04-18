@@ -62,9 +62,9 @@
     background: radial-gradient(circle at center, rgba(249,115,22,0.15) 0%, rgba(34,31,38,0) 70%);
   }
   
-  .scan-container {
-    position: relative;
-    overflow: hidden;
+  .phone-container {
+    max-width: 100%;
+    margin: 0 auto;
   }
   
   .scan-line {
@@ -79,12 +79,18 @@
       rgba(249,115,22,0) 100%
     );
     box-shadow: 0 0 8px rgba(249,115,22,0.5);
-    animation: scan-move 2s linear infinite;
     z-index: 10;
+    animation: scan-move 2s ease-in-out infinite;
   }
 
   @keyframes scan-move {
     0% {
+      transform: translateY(0%);
+    }
+    50% {
+      transform: translateY(100%);
+    }
+    50.1% {
       transform: translateY(0%);
     }
     100% {
